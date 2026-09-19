@@ -3,4 +3,8 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-"""Isaac Lab environments for kapex_locomotion."""
+"""This sub-module contains the functions that are specific to the locomotion environments."""
+
+from isaaclab.utils.module import lazy_export
+
+lazy_export()

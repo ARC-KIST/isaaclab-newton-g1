@@ -3,8 +3,4 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-"""This sub-module contains the functions that are specific to the environment."""
-
-from isaaclab.utils.module import lazy_export
-
-lazy_export()
+"""External Isaac Lab project for Unitree G1 humanoid locomotion on the Newton physics backend."""

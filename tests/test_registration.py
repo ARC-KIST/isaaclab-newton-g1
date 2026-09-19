@@ -7,15 +7,24 @@
 
 import gymnasium as gym
 
-import kapex_locomotion.tasks  # noqa: F401
+import g1_locomotion.tasks  # noqa: F401
+
+CONFIG_MODULE = "g1_locomotion.tasks.locomotion.config.g1"
 
 
 def test_task_registrations():
     """The generated tasks must expose valid environment and agent entry points."""
     expected = {
-        "KapexLocomotion-Locomotion-G1": {
+        "Unitree-G1-Velocity-Newton-Flat": {
             "entry_point": "isaaclab.envs:ManagerBasedRLEnv",
-            "env_cfg_entry_point": "kapex_locomotion.tasks.locomotion.config.g1.env_cfg:LocomotionEnvCfg",
+            "env_cfg_entry_point": f"{CONFIG_MODULE}.flat_env_cfg:G1FlatEnvCfg",
+            "rsl_rl_cfg_entry_point": f"{CONFIG_MODULE}.agents.rsl_rl_ppo_cfg:G1FlatPPORunnerCfg",
+            "default_agent": "rsl_rl",
+        },
+        "Unitree-G1-Velocity-Newton-Rough": {
+            "entry_point": "isaaclab.envs:ManagerBasedRLEnv",
+            "env_cfg_entry_point": f"{CONFIG_MODULE}.rough_env_cfg:G1RoughEnvCfg",
+            "rsl_rl_cfg_entry_point": f"{CONFIG_MODULE}.agents.rsl_rl_ppo_cfg:G1RoughPPORunnerCfg",
             "default_agent": "rsl_rl",
         },
     }
@@ -24,5 +33,5 @@ def test_task_registrations():
         spec = gym.spec(task_id)
         assert spec.entry_point == expected_values["entry_point"]
         assert spec.kwargs["env_cfg_entry_point"] == expected_values["env_cfg_entry_point"]
-        if "default_agent" in expected_values:
-            assert spec.kwargs["default_agent"] == expected_values["default_agent"]
+        assert spec.kwargs["rsl_rl_cfg_entry_point"] == expected_values["rsl_rl_cfg_entry_point"]
+        assert spec.kwargs["default_agent"] == expected_values["default_agent"]

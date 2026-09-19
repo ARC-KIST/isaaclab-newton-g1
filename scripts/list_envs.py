@@ -14,7 +14,7 @@ from prettytable import PrettyTable
 from isaaclab_tasks.utils.preset_cli import enumerate_task_presets
 from isaaclab_tasks.utils.preset_target import PresetTarget
 
-importlib.import_module("kapex_locomotion.tasks")
+importlib.import_module("g1_locomotion.tasks")
 
 
 def _format_presets(preset_map: dict | None) -> str:
@@ -34,7 +34,7 @@ def _format_presets(preset_map: dict | None) -> str:
 def main() -> None:
     """Print the generated project's registered environments."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--keyword", default="KapexLocomotion-", help="Substring used to filter task ids.")
+    parser.add_argument("--keyword", default="Unitree-G1-", help="Substring used to filter task ids.")
     parser.add_argument("--show_presets", action="store_true", help="Show physics, renderer, and domain presets.")
     args = parser.parse_args()
 
@@ -46,7 +46,7 @@ def main() -> None:
         columns.append("Presets")
 
     table = PrettyTable(columns)
-    table.title = "Available kapex_locomotion Environments"
+    table.title = "Available g1_locomotion Environments"
     for column in columns[1:]:
         table.align[column] = "l"
 
